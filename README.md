@@ -11,6 +11,7 @@
 ![pr welcome](https://img.shields.io/badge/PRs-welcome-09FF33.svg?style=flat-square&labelColor=black)
 
 [![codecov](https://codecov.io/gh/jjangga0214/relay-compliant-apollo-server-example/branch/main/graph/badge.svg?token=5YKI4fgSfv)](https://codecov.io/gh/jjangga0214/relay-compliant-apollo-server-example)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fjjangga0214%2Frelay-compliant-apollo-server-example.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fjjangga0214%2Frelay-compliant-apollo-server-example?ref=badge_shield)
 
 ## Get Started
 
@@ -20,3 +21,9 @@ yarn dev
 yarn build
 yarn start
 ```
+
+## License
+
+[MIT License](LICENSE). Copyright &copy; 2020, @jjangga0214 <[bnbcmindnpass@gmail.com](mailto:bnbcmindnpass@gmail.com)>
+
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fjjangga0214%2Frelay-compliant-apollo-server-example.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fjjangga0214%2Frelay-compliant-apollo-server-example?ref=badge_large)
