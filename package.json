@@ -1,0 +1,78 @@
+{
+  "name": "relay-compliant-apollo-server-example",
+  "version": "0.0.1",
+  "main": "dist/index.js",
+  "typescript:main": "src/index.ts",
+  "license": "MIT",
+  "engines": {
+    "node": "12.x"
+  },
+  "_moduleAliases": {
+    "~": "dist"
+  },
+  "scripts": {
+    "format:js": "eslint --ext js --ext md --fix",
+    "format:ts": "eslint --ext ts --ext md --fix",
+    "format:md": "markdownlint --fix",
+    "format": "eslint --ext js --ext ts --ext md --fix && markdownlint",
+    "husky-skip": "cross-env HUSKY_SKIP_HOOKS=1",
+    "test": "jest",
+    "test:unit": "jest test/unit",
+    "coverage": "jest --coverage",
+    "coverage:unit": "jest test/unit --coverage",
+    "coverage:show": "live-server coverage",
+    "commit": "git cz",
+    "build": "tsc --build tsconfig.build.json",
+    "dev": "concurrently --raw 'tsc --build tsconfig.build.json --watch' 'dotenv -- node-dev dist/index.js'",
+    "start": "node dist/index.js",
+    "postinstall": "link-module-alias"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "lint-staged": {
+    "*.{js,ts}": [
+      "eslint --fix"
+    ],
+    "*.md": [
+      "yarn format:md"
+    ]
+  },
+  "devDependencies": {
+    "@commitlint/cli": "^11.0.0",
+    "@commitlint/config-conventional": "^11.0.0",
+    "@types/jest": "^26.0.14",
+    "@types/node": "^14.11.8",
+    "@typescript-eslint/eslint-plugin": "^4.4.1",
+    "@typescript-eslint/parser": "^4.4.1",
+    "commitizen": "^4.2.1",
+    "concurrently": "^5.3.0",
+    "cross-env": "^7.0.2",
+    "cz-conventional-changelog": "^3.3.0",
+    "dotenv-cli": "^4.0.0",
+    "eslint": "7.2.0",
+    "eslint-config-airbnb-base": "14.2.0",
+    "eslint-config-prettier": "^6.12.0",
+    "eslint-import-resolver-typescript": "^2.3.0",
+    "eslint-plugin-import": "^2.21.2",
+    "eslint-plugin-jest": "^24.1.0",
+    "eslint-plugin-markdown": "^1.0.2",
+    "eslint-plugin-prettier": "^3.1.4",
+    "husky": "^4.3.0",
+    "jest": "^26.5.3",
+    "link-module-alias": "^1.2.0",
+    "lint-staged": "^10.4.0",
+    "live-server": "^1.2.1",
+    "markdownlint-cli": "^0.24.0",
+    "node-dev": "^5.2.0",
+    "prettier": "^2.1.2",
+    "ts-jest": "^26.4.1",
+    "typescript": "^4.0.3"
+  },
+  "dependencies": {
+    "js-base64": "^3.5.2"
+  }
+}
