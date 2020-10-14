@@ -9,6 +9,7 @@
 [![Conventional Commits](https://img.shields.io/badge/Conventional%20Commits-1.0.0-ffab00.svg?style=flat-square&labelColor=black)](https://conventionalcommits.org)
 [![Commitizen friendly](https://img.shields.io/badge/Commitizen-cz_conventional_changelog-dd2c00.svg?style=flat-square&labelColor=black)](http://commitizen.github.io/cz-cli/)
 ![pr welcome](https://img.shields.io/badge/PRs-welcome-09FF33.svg?style=flat-square&labelColor=black)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fjjangga0214%2Frelay-compliant-apollo-server-example.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fjjangga0214%2Frelay-compliant-apollo-server-example?ref=badge_shield)
 
 [![codecov](https://codecov.io/gh/jjangga0214/relay-compliant-apollo-server-example/branch/main/graph/badge.svg?token=5YKI4fgSfv)](https://codecov.io/gh/jjangga0214/relay-compliant-apollo-server-example)
 
@@ -20,3 +21,7 @@ yarn dev
 yarn build
 yarn start
 ```
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fjjangga0214%2Frelay-compliant-apollo-server-example.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fjjangga0214%2Frelay-compliant-apollo-server-example?ref=badge_large)
