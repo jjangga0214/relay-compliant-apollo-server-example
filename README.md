@@ -10,6 +10,8 @@
 [![Commitizen friendly](https://img.shields.io/badge/Commitizen-cz_conventional_changelog-dd2c00.svg?style=flat-square&labelColor=black)](http://commitizen.github.io/cz-cli/)
 ![pr welcome](https://img.shields.io/badge/PRs-welcome-09FF33.svg?style=flat-square&labelColor=black)
 
+[![codecov](https://codecov.io/gh/jjangga0214/relay-compliant-apollo-server-example/branch/main/graph/badge.svg?token=5YKI4fgSfv)](https://codecov.io/gh/jjangga0214/relay-compliant-apollo-server-example)
+
 ## Get Started
 
 ```bash
