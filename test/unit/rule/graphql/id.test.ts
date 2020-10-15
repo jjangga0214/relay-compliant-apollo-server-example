@@ -1,11 +1,11 @@
-import { encode, decode } from '~/rule/graphql/id'
+import { encode, decode, Type } from '~/rule/graphql/id'
 
 describe('encode and decode opaque identifier to/from GraphQL.', () => {
   it('encode', () => {
     expect.hasAssertions()
     expect(
       encode({
-        type: 'STORE',
+        type: Type.STORE,
         value: 'hello, world!',
       }),
     ).toStrictEqual('U1RPUkVfX2hlbGxvLCB3b3JsZCE=')
@@ -14,7 +14,7 @@ describe('encode and decode opaque identifier to/from GraphQL.', () => {
   it('decode', () => {
     expect.hasAssertions()
     expect(decode('U1RPUkVfX2hlbGxvLCB3b3JsZCE=')).toStrictEqual({
-      type: 'STORE',
+      type: Type.STORE,
       value: 'hello, world!',
     })
   })

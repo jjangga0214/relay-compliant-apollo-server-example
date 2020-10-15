@@ -4,8 +4,8 @@ import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { addResolversToSchema } from '@graphql-tools/schema'
 import deepmerge from 'deepmerge'
 import { Resolvers } from '~/generated/graphql'
-import schemaResolvers from '~/resolvers/schema'
-import storeResolvers from '~/resolvers/stores'
+import schemaResolvers from '~/resolver/schema'
+import storeResolvers from '~/resolver/stores'
 
 const resolvers: Resolvers = deepmerge.all([schemaResolvers, storeResolvers])
 

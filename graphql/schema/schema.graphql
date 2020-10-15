@@ -25,5 +25,5 @@ type Query {
   """
   Fetches an object given its ID.
   """
-  node(id: ID!): Node!
+  node(id: ID!): Node
 }
