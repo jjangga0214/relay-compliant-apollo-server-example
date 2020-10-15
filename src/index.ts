@@ -1,4 +1,4 @@
-import { ApolloServer, ServerInfo } from 'apollo-server'
+import { ApolloServer, ServerInfo, SchemaDirectiveVisitor } from 'apollo-server'
 import { loadSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { addResolversToSchema } from '@graphql-tools/schema'
@@ -6,6 +6,7 @@ import deepmerge from 'deepmerge'
 import { Resolvers } from '~/generated/graphql'
 import schemaResolvers from '~/resolver/schema'
 import storeResolvers from '~/resolver/stores'
+import { MinDirective } from '~/graphql/directive/scalar'
 
 const resolvers: Resolvers = deepmerge.all([schemaResolvers, storeResolvers])
 
@@ -18,15 +19,22 @@ const schemaWithResolvers = addResolversToSchema({
   resolvers,
 })
 
+SchemaDirectiveVisitor.visitSchemaDirectives(schemaWithResolvers, {
+  min: MinDirective,
+})
+
 const server = new ApolloServer({
   schema: schemaWithResolvers,
-  resolvers,
+  // resolvers,
   /*
   ref: https://www.apollographql.com/docs/apollo-server/api/apollo-server/#playground  
   For convenience, playground is to be hosted even on production in this example.
   In real case, I recommend to remove the next line. 
   */
   playground: true,
+  schemaDirectives: {
+    min: MinDirective,
+  },
 })
 
 // The `listen` method launches a web server.

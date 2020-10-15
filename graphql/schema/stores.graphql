@@ -18,5 +18,10 @@ type StoreConnection {
 }
 
 extend type Query {
-  stores(after: String, before: String, first: Int, last: Int): StoreConnection
+  stores(
+    after: String
+    before: String
+    first: Int @min(value: 1)
+    last: Int @min(value: 1)
+  ): StoreConnection
 }

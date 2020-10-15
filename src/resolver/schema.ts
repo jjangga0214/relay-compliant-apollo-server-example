@@ -16,6 +16,11 @@ async function resolveNodeImpl(decodedGqlId: DecodedGqlId, id: string) {
     }
     return { ...store, id }
   }
+  /* Uncomment if other types are to be added. 
+  else if (decodedGqlId.type === Type.ANOTHER){
+    return {...another, id}
+  }
+  */
   throw new UserInputError(`Invalid Node ID. Type name is not valid.`)
 }
 

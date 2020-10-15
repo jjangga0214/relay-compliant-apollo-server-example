@@ -4,7 +4,7 @@ import { storeLoader } from '~/logic/store'
 const mockedAxios = axios as jest.Mocked<typeof axios>
 jest.mock('axios')
 
-describe('read store data with various arguments combination.', () => {
+describe('read store data with coordinate dynamically loaded.', () => {
   it('storeLoader.loadMany', async () => {
     mockedAxios.post.mockResolvedValue({
       data: {

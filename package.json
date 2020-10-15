@@ -85,11 +85,13 @@
     "@graphql-tools/graphql-file-loader": "^6.2.4",
     "@graphql-tools/load": "^6.2.4",
     "@graphql-tools/schema": "^6.2.4",
+    "@graphql-tools/utils": "^6.2.4",
     "apollo-server": "^2.18.2",
     "axios": "^0.20.0",
     "dataloader": "^2.0.0",
     "deepmerge": "^4.2.2",
     "graphql": "^15.3.0",
+    "graphql-constraint-directive": "^2.1.0",
     "js-base64": "^3.5.2"
   }
 }
