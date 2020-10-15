@@ -1,6 +1,5 @@
 import DataLoader from 'dataloader'
 import axios from 'axios'
-import deepmerge from 'deepmerge'
 import Store from '~/model/store'
 
 interface Coordinate {
@@ -21,14 +20,17 @@ async function fetchCoordinate(
 
 export const storeCoordinateLoader = new DataLoader(fetchCoordinate)
 
-export const storeLoader = new DataLoader(async (names: readonly string[]) => {
-  // A dataloader has to match sequence of output and input.
-  const many = Store.findMany(names).sort((former, latter) => {
-    return names.indexOf(former.name) - names.indexOf(latter.name)
-  })
-
-  return many.map(async (one) => {
-    const coordinate = await storeCoordinateLoader.load(one.postcode)
-    return deepmerge(one, coordinate)
-  })
+/**
+ * As there are not many types, storeLoader is not useful,
+ * because Store.findMany can replace it, as there's no need for batch, actually.
+ * However, this is implemented as an example.
+ */
+export const storeLoader = new DataLoader((names: readonly string[]) => {
+  return Promise.resolve(
+    Store.findMany(names).sort(
+      // A dataloader has to match sequence of output and input.
+      (former, latter) =>
+        names.indexOf(former.name) - names.indexOf(latter.name),
+    ),
+  )
 })

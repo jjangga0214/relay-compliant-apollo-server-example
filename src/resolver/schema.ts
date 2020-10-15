@@ -5,7 +5,7 @@ import { storeLoader } from '~/logic/store'
 
 const Node: NodeResolvers = {
   // Make sure the enum Type's values are identical with those of GraphQL
-  __resolveType: ({ id }) => decode(id).type,
+  __resolveType: ({ id }) => decode(id as string).type,
 }
 
 async function resolveNodeImpl(decodedGqlId: DecodedGqlId, id: string) {
@@ -16,7 +16,7 @@ async function resolveNodeImpl(decodedGqlId: DecodedGqlId, id: string) {
     }
     return { ...store, id }
   }
-  /* Uncomment if other types are to be added. 
+  /* Uncomment if other types are to be added.
   else if (decodedGqlId.type === Type.ANOTHER){
     return {...another, id}
   }
