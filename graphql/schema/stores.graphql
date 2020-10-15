@@ -1,0 +1,22 @@
+type Store implements Node {
+  id: ID!
+  name: String!
+  postcode: String!
+  longitude: Float!
+  latitude: Float!
+}
+
+type StoreEdge {
+  cursor: String!
+  node: Store!
+}
+
+type StoreConnection {
+  edges: [StoreEdge]!
+  pageInfo: PageInfo!
+  totalCount: Int!
+}
+
+extend type Query {
+  stores(after: String, before: String, first: Int, last: Int): StoreConnection
+}
