@@ -2,36 +2,12 @@ import { ApolloServer, ServerInfo } from 'apollo-server'
 import { loadSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { addResolversToSchema } from '@graphql-tools/schema'
+import deepmerge from 'deepmerge'
 import { Resolvers } from '~/generated/graphql'
+import schemaResolvers from '~/resolvers/schema'
+import storeResolvers from '~/resolvers/stores'
 
-const resolvers: Resolvers = {
-  Query: {
-    node: (_, { id }) => {
-      console.log(id)
-      return {
-        id: '111',
-        latitude: -1.1,
-        longitude: 1.1,
-        name: 'hello, world!',
-        postcode: 'BCG GBC',
-      }
-    },
-    stores: (_, { after, before, first, last }) => {
-      console.log(after, before, first, last)
-      return {
-        edges: [],
-        pageInfo: {
-          hasNextPage: false,
-          hasPreviousPage: false,
-        },
-        totalCount: 0,
-      }
-    },
-  },
-  Node: {
-    __resolveType: () => 'Store',
-  },
-}
+const resolvers: Resolvers = deepmerge.all([schemaResolvers, storeResolvers])
 
 const schema = loadSchemaSync('graphql/schema/**/*.graphql', {
   loaders: [new GraphQLFileLoader()],
@@ -44,6 +20,7 @@ const schemaWithResolvers = addResolversToSchema({
 
 const server = new ApolloServer({
   schema: schemaWithResolvers,
+  resolvers,
   /*
   ref: https://www.apollographql.com/docs/apollo-server/api/apollo-server/#playground  
   For convenience, playground is to be hosted even on production in this example.

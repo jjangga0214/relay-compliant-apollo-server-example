@@ -16,6 +16,10 @@
 ## Get Started
 
 ```bash
+cp .env.example .env
+```
+
+```bash
 yarn install
 yarn dev
 yarn build
