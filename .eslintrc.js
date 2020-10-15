@@ -16,6 +16,7 @@ const common = {
     'jest/expect-expect': 'off',
     'jest/prefer-expect-assertions': 'off',
     'jest/no-test-return-statement': 'off',
+    'jest/require-to-throw-message': 'off',
     'import/prefer-default-export': 'off',
     'import/extensions': 'off',
     'no-console': 'off',

@@ -11,10 +11,10 @@
     "~": "dist"
   },
   "scripts": {
-    "format:js": "eslint --ext js --ext md --fix",
-    "format:ts": "eslint --ext ts --ext md --fix",
-    "format:md": "markdownlint --fix",
-    "format": "eslint --ext js --ext ts --ext md --fix && markdownlint",
+    "format:js": "eslint --ext js --ext md --fix .",
+    "format:ts": "eslint --ext ts --ext md --fix .",
+    "format:md": "markdownlint --fix .",
+    "format": "eslint --ext js --ext ts --ext md --fix . && markdownlint --fix .",
     "husky-skip": "cross-env HUSKY_SKIP_HOOKS=1",
     "test": "jest",
     "test:unit": "jest test/unit",

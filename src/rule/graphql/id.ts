@@ -2,13 +2,13 @@ import { Base64 } from 'js-base64'
 
 export const DELIMITER = '__'
 
-export function encode({ type, value }: DecodedGqlId): string {
-  return Base64.encode(`${type}${DELIMITER}${value}`)
-}
-
 export interface DecodedGqlId {
   type: string
   value: string
+}
+
+export function encode({ type, value }: DecodedGqlId): string {
+  return Base64.encode(`${type}${DELIMITER}${value}`)
 }
 
 export function decode(gqlId: string): DecodedGqlId {

@@ -1,7 +1,7 @@
 import { encode, decode } from '~/rule/graphql/id'
 
-describe('Encode and decode opaque identifier to/from GraphQL.', () => {
-  it('encode ', () => {
+describe('encode and decode opaque identifier to/from GraphQL.', () => {
+  it('encode', () => {
     expect.hasAssertions()
     expect(
       encode({
