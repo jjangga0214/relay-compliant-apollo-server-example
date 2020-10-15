@@ -1,7 +1,7 @@
 import { storeCoordinateLoader } from '~/logic/store'
 
 describe('fetch coordinates by postcode in batch.', () => {
-  it('loadMany', async () => {
+  it('storeCoordinateLoader.loadMany', async () => {
     expect.hasAssertions()
 
     expect(

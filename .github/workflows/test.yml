@@ -80,12 +80,25 @@ jobs:
           --ci \
           --coverageDirectory ./reports/unit-coverage
 
+      - name: Integration Test
+        run: |
+          yarn coverage:integration \
+          --ci \
+          --coverageDirectory ./reports/integration-coverage
+
       - name: Upload Unit Test Coverage To Codecov
         uses: codecov/codecov-action@v1
         with:
           token: ${{secrets.CODECOV_TOKEN}}
           file: reports/unit-coverage/*.json
           flags: unit
+
+      - name: Upload Integration Test Coverage To Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          token: ${{secrets.CODECOV_TOKEN}}
+          file: reports/integration-coverage/*.json
+          flags: integration
 
       - name: Lint
         run: yarn eslint --ext ts --ext js .

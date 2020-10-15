@@ -41,7 +41,12 @@ function findBackward({ last, beforeIndex = data.length }: FindBackwardOption) {
   return data.slice(start, beforeIndex)
 }
 export default {
+  findMany(names: readonly string[]) {
+    // This is O(n), but in production, real database should be indexed.
+    return data.filter((store) => names.includes(store.name))
+  },
   findOne(name: string) {
+    // This is O(n), but in production, real database should be indexed.
     return data.find((store) => store.name === name) || null
   },
   findForward,

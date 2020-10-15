@@ -8,6 +8,25 @@ describe('read store data with various arguments combination.', () => {
       postcode: 'BN14 9GB',
     })
   })
+
+  it('findMany', () => {
+    expect.hasAssertions()
+    expect(Store.findMany(['Worthing', 'Rustington', 'Hove'])).toStrictEqual([
+      {
+        name: 'Worthing',
+        postcode: 'BN14 9GB',
+      },
+      {
+        name: 'Rustington',
+        postcode: 'BN16 3RT',
+      },
+      {
+        name: 'Hove',
+        postcode: 'BN3 7PN',
+      },
+    ])
+  })
+
   it('findForward', () => {
     expect(Store.findForward({ first: 3, afterIndex: 2 })).toStrictEqual([
       {

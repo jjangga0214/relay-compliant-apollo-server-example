@@ -26,4 +26,9 @@ type Query {
   Fetches an object given its ID.
   """
   node(id: ID!): Node
+
+  """
+  Lookup nodes by a list of IDs.
+  """
+  nodes(ids: [ID!]!): [Node]!
 }

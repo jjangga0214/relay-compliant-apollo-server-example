@@ -8,12 +8,12 @@ describe('encode and decode opaque identifier to/from GraphQL.', () => {
         type: Type.STORE,
         value: 'hello, world!',
       }),
-    ).toStrictEqual('U1RPUkVfX2hlbGxvLCB3b3JsZCE=')
+    ).toStrictEqual('U3RvcmVfX2hlbGxvLCB3b3JsZCE=')
   })
 
   it('decode', () => {
     expect.hasAssertions()
-    expect(decode('U1RPUkVfX2hlbGxvLCB3b3JsZCE=')).toStrictEqual({
+    expect(decode('U3RvcmVfX2hlbGxvLCB3b3JsZCE=')).toStrictEqual({
       type: Type.STORE,
       value: 'hello, world!',
     })
