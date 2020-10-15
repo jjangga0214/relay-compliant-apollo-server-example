@@ -71,6 +71,9 @@ jobs:
         env:
           CI: true
 
+      - name: Run GraphQL Code Generator
+        run: yarn gqlcodegen
+
       - name: Unit Test
         run: |
           yarn coverage:unit \

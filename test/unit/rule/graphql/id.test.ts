@@ -17,9 +17,12 @@ describe('encode and decode opaque identifier to/from GraphQL.', () => {
       type: 'STORE',
       value: 'hello, world!',
     })
+  })
 
+  it('decode: should throw an Error if opaque identifier does not follow rules.', () => {
+    expect.hasAssertions()
     expect(() => {
-      decode('U1RPUxvLCB3b3JsZCE=')
+      decode('U1RPUxvLCB3b3JsZCE=') // e.g. When there is no DELIMITER.
     }).toThrow()
   })
 })
