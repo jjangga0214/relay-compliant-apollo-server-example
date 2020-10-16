@@ -1,6 +1,6 @@
 import DataLoader from 'dataloader'
 import axios from 'axios'
-import Store from '~/model/store'
+import Stores from '~/model/store'
 
 interface Coordinate {
   longitude: number
@@ -27,7 +27,7 @@ export const storeCoordinateLoader = new DataLoader(fetchCoordinate)
  */
 export const storeLoader = new DataLoader((names: readonly string[]) => {
   return Promise.resolve(
-    Store.findMany(names).sort(
+    Stores.findMany(names).sort(
       // A dataloader has to match sequence of output and input.
       (former, latter) =>
         names.indexOf(former.name) - names.indexOf(latter.name),

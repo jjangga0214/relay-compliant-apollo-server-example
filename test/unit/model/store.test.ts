@@ -1,9 +1,9 @@
-import Store from '~/model/store'
+import Stores from '~/model/store'
 
 describe('read store data with various arguments combination.', () => {
   it('findOne', () => {
     expect.hasAssertions()
-    expect(Store.findOne('Worthing')).toStrictEqual({
+    expect(Stores.findOne('Worthing')).toStrictEqual({
       name: 'Worthing',
       postcode: 'BN14 9GB',
     })
@@ -11,7 +11,7 @@ describe('read store data with various arguments combination.', () => {
 
   it('findMany', () => {
     expect.hasAssertions()
-    expect(Store.findMany(['Worthing', 'Rustington', 'Hove'])).toStrictEqual([
+    expect(Stores.findMany(['Worthing', 'Rustington', 'Hove'])).toStrictEqual([
       {
         name: 'Worthing',
         postcode: 'BN14 9GB',
@@ -27,47 +27,66 @@ describe('read store data with various arguments combination.', () => {
     ])
   })
 
-  it('findForward', () => {
-    expect(Store.findForward({ first: 3, afterIndex: 2 })).toStrictEqual([
+  it('paginate', () => {
+    expect(Stores.paginate({ first: 3, afterIndex: 2 })).toStrictEqual([
       {
-        name: 'Rustington',
-        postcode: 'BN16 3RT',
+        cursor: 3,
+        node: {
+          name: 'Rustington',
+          postcode: 'BN16 3RT',
+        },
       },
       {
-        name: 'Eastbourne',
-        postcode: 'BN23 6QD',
+        cursor: 4,
+        node: {
+          name: 'Eastbourne',
+          postcode: 'BN23 6QD',
+        },
       },
       {
-        name: 'Hove',
-        postcode: 'BN3 7PN',
-      },
-    ])
-
-    expect(Store.findForward({ first: 100, afterIndex: 92 })).toStrictEqual([
-      {
-        name: 'Watford',
-        postcode: 'WD17 2SF',
-      },
-      {
-        name: 'Borehamwood',
-        postcode: 'WD6 4PR',
+        cursor: 5,
+        node: {
+          name: 'Hove',
+          postcode: 'BN3 7PN',
+        },
       },
     ])
 
-    expect(Store.findForward({ first: 2 })).toStrictEqual([
+    expect(Stores.paginate({ first: 100, afterIndex: 92 })).toStrictEqual([
       {
-        name: 'St_Albans',
-        postcode: 'AL1 2RJ',
+        cursor: 93,
+        node: {
+          name: 'Watford',
+          postcode: 'WD17 2SF',
+        },
       },
       {
-        name: 'Hatfield',
-        postcode: 'AL9 5JP',
+        cursor: 94,
+        node: {
+          name: 'Borehamwood',
+          postcode: 'WD6 4PR',
+        },
       },
     ])
 
-    expect(Store.findForward({ first: 10, afterIndex: 10000 })).toStrictEqual(
-      [],
-    )
+    expect(Stores.paginate({ first: 2 })).toStrictEqual([
+      {
+        cursor: 0,
+        node: {
+          name: 'St_Albans',
+          postcode: 'AL1 2RJ',
+        },
+      },
+      {
+        cursor: 1,
+        node: {
+          name: 'Hatfield',
+          postcode: 'AL9 5JP',
+        },
+      },
+    ])
+
+    expect(Stores.paginate({ first: 10, afterIndex: 10000 })).toStrictEqual([])
   })
   /**
    * TODO: add tests for Store.findBackward

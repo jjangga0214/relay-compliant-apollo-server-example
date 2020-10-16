@@ -28,12 +28,11 @@ export function validatePaginationArgs({
 
   // ref: https://github.com/Mikhus/graphql-fields-list
   const directlyQueriedFields = fieldsList(info)
-
   /**
-   * e.g. If only 'totalCount' is queried, 'first' or 'last' are not required.L0
+   * e.g. If only 'totalCount' is queried, 'first' or 'last' are not required.
    * e.g. If 'edges' is queried, either 'first' or 'last' is required.
    */
-  const requiresFirstOrLast = directlyQueriedFields.every((el) =>
+  const requiresFirstOrLast = !directlyQueriedFields.every((el) =>
     fieldsNonRequiringFirstOrLast.includes(el),
   )
 

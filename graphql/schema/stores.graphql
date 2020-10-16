@@ -2,8 +2,8 @@ type Store implements Node {
   id: ID!
   name: String!
   postcode: String!
-  longitude: Float!
-  latitude: Float!
+  longitude: Float
+  latitude: Float
 }
 
 type StoreEdge {

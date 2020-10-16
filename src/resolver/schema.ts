@@ -18,6 +18,10 @@ async function resolveNodeImpl(decodedGqlId: DecodedGqlId, id: string) {
   }
   /* Uncomment if other types are to be added.
   else if (decodedGqlId.type === Type.ANOTHER){
+    const another = await anotherLoader.load(decodedGqlId.value)
+    if (!another) {
+      return null
+    }
     return {...another, id}
   }
   */
