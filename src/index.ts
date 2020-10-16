@@ -3,12 +3,12 @@ import { loadSchemaSync } from '@graphql-tools/load'
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader'
 import { addResolversToSchema } from '@graphql-tools/schema'
 import deepmerge from 'deepmerge'
-import { Resolvers } from '~/generated/graphql'
+import { GqlResolvers } from '~/generated/graphql'
 import schemaResolvers from '~/resolver/schema'
 import storeResolvers from '~/resolver/stores'
 import { MinDirective } from '~/graphql/directive/scalar'
 
-const resolvers: Resolvers = deepmerge.all([schemaResolvers, storeResolvers])
+const resolvers: GqlResolvers = deepmerge.all([schemaResolvers, storeResolvers])
 
 const schema = loadSchemaSync('graphql/schema/**/*.graphql', {
   loaders: [new GraphQLFileLoader()],

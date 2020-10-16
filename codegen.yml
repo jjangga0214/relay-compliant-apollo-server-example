@@ -8,5 +8,6 @@ generates:
       - add:
           content: "import { DeepPartial } from 'utility-types';"
     config:
+      typesPrefix: Gql
       useIndexSignature: true
       defaultMapper: DeepPartial<{T}>

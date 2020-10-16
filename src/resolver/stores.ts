@@ -1,12 +1,12 @@
 import { isPointWithinRadius } from 'geolib'
 import { UserInputError } from 'apollo-server'
-import { QueryResolvers, StoreResolvers } from '~/generated/graphql'
+import { GqlQueryResolvers, GqlStoreResolvers } from '~/generated/graphql'
 import { validatePaginationArgs } from '~/rule/graphql/connection'
 import { decode, encode, Type } from '~/rule/graphql/id'
-import { storeCoordinateLoader } from '~/logic/store'
+import { storeCoordinateLoader, paginate } from '~/logic/store'
 import Stores from '~/model/store'
 
-const Query: QueryResolvers = {
+const Query: GqlQueryResolvers = {
   stores: async (_, { after, before, first, last, nearByInput }, __, info) => {
     validatePaginationArgs({
       paginationArgs: { after, before, first, last },
@@ -26,12 +26,27 @@ const Query: QueryResolvers = {
       return result
     }
 
-    const { edges, pageInfo } = await Stores.paginate({
+    const { edges, pageInfo } = await paginate({
       afterIndex,
       beforeIndex,
       first,
       last,
-      where: async (store) => {
+      mapper: async ({ cursor, node }) => {
+        const coordinate = await storeCoordinateLoader.load(node.name)
+        if (!coordinate) {
+          return { cursor, node }
+        }
+        const { latitude, longitude } = coordinate
+        return {
+          cursor,
+          node: {
+            ...node,
+            latitude,
+            longitude,
+          },
+        }
+      },
+      where: async (edge) => {
         if (nearByInput) {
           const centerCoordinate = await storeCoordinateLoader.load(
             nearByInput.postcode,
@@ -40,7 +55,7 @@ const Query: QueryResolvers = {
             throw new UserInputError('Malformed or unsupported postcode.')
           }
           const storeCoordinate = await storeCoordinateLoader.load(
-            store.postcode,
+            edge.node.postcode,
           )
           // Some store's postcode can be unsupported from API.
           if (!storeCoordinate) {
@@ -58,10 +73,28 @@ const Query: QueryResolvers = {
 
     return {
       ...result,
-      edges: edges.map(({ node, cursor }) => ({
-        node,
-        cursor: encode({ type: Type.STORE, value: cursor.toString() }),
-      })),
+      edges: edges
+        .map(({ node, cursor }) => ({
+          node,
+          cursor: encode({ type: Type.STORE, value: cursor.toString() }),
+        }))
+        .sort((former, latter) => {
+          if (
+            former.node.latitude === null ||
+            former.node.latitude === undefined
+          ) {
+            return +1
+          }
+          if (
+            latter.node.latitude === null ||
+            latter.node.latitude === undefined
+          ) {
+            return -1
+          }
+          return (
+            (latter.node.latitude as number) - (former.node.latitude as number)
+          )
+        }),
       pageInfo: {
         ...pageInfo,
         endCursor: pageInfo.endCursor
@@ -75,7 +108,7 @@ const Query: QueryResolvers = {
   },
 }
 
-const Store: StoreResolvers = {
+const Store: GqlStoreResolvers = {
   id: ({ name }) => encode({ type: Type.STORE, value: name as string }),
   latitude: async ({ postcode }) => {
     const coordinate = await storeCoordinateLoader.load(postcode as string)
