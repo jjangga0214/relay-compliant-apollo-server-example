@@ -1,3 +1,4 @@
+import filterAsync from 'node-filter-async'
 import _data from './stores.json'
 
 export interface Store {
@@ -7,23 +8,28 @@ export interface Store {
 
 const data: readonly Store[] = _data
 
-function paginate({
+async function paginate({
   afterIndex = -1,
   beforeIndex = data.length,
   first,
   last,
+  where = (_) => Promise.resolve(true),
 }: {
   afterIndex?: number
   beforeIndex?: number
   first?: number | null | undefined
   last?: number | null | undefined
+  where?: (store: Store) => Promise<boolean>
 }) {
   if (afterIndex < -1) {
     throw new Error(`'afterIndex' has to be greater than or equal to -1.`)
   } else if (beforeIndex < 0) {
     throw new Error(`'beforeIndex' has to be greater than or equal to 0.`)
   }
-  const between = data.slice(afterIndex + 1, beforeIndex)
+  const between = await filterAsync(
+    data.slice(afterIndex + 1, beforeIndex),
+    where,
+  )
 
   let edges: { cursor: number; node: Store }[]
 

@@ -4420,6 +4420,11 @@ gensync@^1.0.0-beta.1:
   resolved "https://registry.yarnpkg.com/gensync/-/gensync-1.0.0-beta.1.tgz#58f4361ff987e5ff6e1e7a210827aa371eaac269"
   integrity sha512-r8EC6NO1sngH/zdD9fiRDLdcgnbayXah+mLgManTaIZJqEC1MZstmnox8KpnI2/fxQwrp5OpCOYWLp4rBl4Jcg==
 
+geolib@^3.3.1:
+  version "3.3.1"
+  resolved "https://registry.yarnpkg.com/geolib/-/geolib-3.3.1.tgz#f144a53b6a6858e81111ff71d137318389927611"
+  integrity sha512-sfahBXFcgELdpumDZV5b3KWiINkZxC5myAkLk067UUcTmTXaiE9SWmxMEHztn/Eus4JX6kesHxaIuZlniYgUtg==
+
 get-caller-file@^2.0.1, get-caller-file@^2.0.5:
   version "2.0.5"
   resolved "https://registry.yarnpkg.com/get-caller-file/-/get-caller-file-2.0.5.tgz#4f94412a82db32f36e3b0b9741f8a97feb031f7e"
@@ -6875,6 +6880,11 @@ node-fetch@^1.0.1:
   dependencies:
     encoding "^0.1.11"
     is-stream "^1.0.1"
+
+node-filter-async@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/node-filter-async/-/node-filter-async-2.0.0.tgz#c4fc9377683491b82ad0cdea73c99dd23f37578a"
+  integrity sha512-e4EFVl6QmLrWV8fe0hcCa7YLZQ6lUKrz4tMGZQNYy8y6dM1c/w6RCZThudoUCYzrUZYcb/ncZqlTuugoxTE/qQ==
 
 node-gyp-build@~3.7.0:
   version "3.7.0"

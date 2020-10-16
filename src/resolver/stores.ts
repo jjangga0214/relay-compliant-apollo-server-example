@@ -1,3 +1,5 @@
+import { isPointWithinRadius } from 'geolib'
+import { UserInputError } from 'apollo-server'
 import { QueryResolvers, StoreResolvers } from '~/generated/graphql'
 import { validatePaginationArgs } from '~/rule/graphql/connection'
 import { decode, encode, Type } from '~/rule/graphql/id'
@@ -5,7 +7,7 @@ import { storeCoordinateLoader } from '~/logic/store'
 import Stores from '~/model/store'
 
 const Query: QueryResolvers = {
-  stores: (_, { after, before, first, last }, __, info) => {
+  stores: async (_, { after, before, first, last, nearByInput }, __, info) => {
     validatePaginationArgs({
       paginationArgs: { after, before, first, last },
       conectionName: 'stores',
@@ -24,11 +26,34 @@ const Query: QueryResolvers = {
       return result
     }
 
-    const { edges, pageInfo } = Stores.paginate({
+    const { edges, pageInfo } = await Stores.paginate({
       afterIndex,
       beforeIndex,
       first,
       last,
+      where: async (store) => {
+        if (nearByInput) {
+          const centerCoordinate = await storeCoordinateLoader.load(
+            nearByInput.postcode,
+          )
+          if (!centerCoordinate) {
+            throw new UserInputError('Malformed or unsupported postcode.')
+          }
+          const storeCoordinate = await storeCoordinateLoader.load(
+            store.postcode,
+          )
+          // Some store's postcode can be unsupported from API.
+          if (!storeCoordinate) {
+            return false
+          }
+          return isPointWithinRadius(
+            centerCoordinate,
+            storeCoordinate,
+            nearByInput.radius,
+          )
+        }
+        return true
+      },
     })
 
     return {
