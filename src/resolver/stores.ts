@@ -32,7 +32,7 @@ const Query: GqlQueryResolvers = {
       first,
       last,
       mapper: async ({ cursor, node }) => {
-        const coordinate = await storeCoordinateLoader.load(node.name)
+        const coordinate = await storeCoordinateLoader.load(node.postcode)
         if (!coordinate) {
           return { cursor, node }
         }
